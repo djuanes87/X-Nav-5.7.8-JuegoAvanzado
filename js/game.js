@@ -271,6 +271,7 @@ var moveMonster = function(modifier){
 			&& m.y <= (hero.y + 32)
 		){
 			resetAll();
+			saveStatus();
 		}
 	}
 }
@@ -375,11 +376,26 @@ var saveStatus = function(){
 };
 
 var chargeConst = function(){
-	level = localStorage.getItem("level");
-	nrocks = localStorage.getItem("nrocks");
-	nmonster = localStorage.getItem("nmonster");
-	princessesCaught = localStorage.getItem("princess");
-	velmonster = localStorage.getItem("velmonster");
+	if((level = localStorage.getItem("level")) == null){
+		level = 1;
+	}
+	console.log(level);
+	if((nrocks = localStorage.getItem("nrocks")) == null){
+		nrocks = 0;
+	}
+	console.log(nrocks);
+	if((nmonster = localStorage.getItem("nmonster")) == null){
+		nmonster = 0;
+	}
+	console.log(nmonster);
+	if((princessesCaught = localStorage.getItem("princess")) == null){
+		princessesCaught = 0;
+	}
+	console.log(princessesCaught);
+	if((velmonster = localStorage.getItem("velmonster")) == null){
+		velmonster = 0;
+	}
+	console.log(velmonster);
 };
 
 // The main game loop
@@ -395,7 +411,10 @@ var main = function () {
 
 // Let's play this game!
 chargeConst();
-resetAll();
+resetHero();
+resetRocks();
+resetPrincess();
+resetMosters();
 
 
 var then = Date.now();
